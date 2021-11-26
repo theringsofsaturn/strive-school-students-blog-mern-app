@@ -11,13 +11,15 @@ import Sidebar from "../src/component/sidebar/Sidebar";
 import Posts from "../src/component/posts/Posts";
 import Homepage from "./pages/homepage/Homepage";
 import Single from "./pages/single/Single";
+import Write from "./pages/write/Write";
 // import SinglePost from './components/singlePost/SinglePost';
 
 function App() {
   return (
     <Router>
       <Topbar />
-      <Single />
+      <Write/>
+      {/* <Single /> */}
       {/* <Homepage /> */}
     </Router>
   );
