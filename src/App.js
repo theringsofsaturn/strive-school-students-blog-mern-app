@@ -10,16 +10,15 @@ import Header from "../src/component/header/Header";
 import Sidebar from "../src/component/sidebar/Sidebar";
 import Posts from "../src/component/posts/Posts";
 import Homepage from "./pages/homepage/Homepage";
+import Single from "./pages/single/Single";
 // import SinglePost from './components/singlePost/SinglePost';
 
 function App() {
   return (
     <Router>
       <Topbar />
-
-      <div className="App">
-        <Homepage />
-      </div>
+      <Single />
+      {/* <Homepage /> */}
     </Router>
   );
 }
