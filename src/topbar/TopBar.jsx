@@ -1,7 +1,8 @@
-import "./topbar.css";
 import { Link } from "react-router-dom";
+import "./topbar.css";
 
-const TopBar = () => {
+export default function Topbar() {
+  const user = true;
   return (
     <div className="top">
       <div className="topLeft">
@@ -24,35 +25,34 @@ const TopBar = () => {
               WRITE
             </Link>
           </li>
-          {/* {user && <li className="topListItem">LOGOUT</li>} */}
+          {user && <li className="topListItem">LOGOUT</li>}
         </ul>
       </div>
       <div className="topRight">
-        (
-        <Link className="link" to="/settings">
-          <img
-            className="topImg"
-            src="https://images.gr-assets.com/users/1632342929p8/140785582.jpg"
-            alt=""
-          />
-        </Link>
+        {user ? (
+          <Link className="link" to="/settings">
+            <img
+              className="topImg"
+              src="https://images.gr-assets.com/users/1632342929p8/140785582.jpg"
+              alt=""
+            />
+          </Link>
         ) : (
-        <ul className="topList">
-          <li className="topListItem">
-            <Link className="link" to="/login">
-              LOGIN
-            </Link>
-          </li>
-          <li className="topListItem">
-            <Link className="link" to="/register">
-              REGISTER
-            </Link>
-          </li>
-        </ul>
+          <ul className="topList">
+            <li className="topListItem">
+              <Link className="link" to="/login">
+                LOGIN
+              </Link>
+            </li>
+            <li className="topListItem">
+              <Link className="link" to="/register">
+                REGISTER
+              </Link>
+            </li>
+          </ul>
+        )}
         <i className="topSearchIcon fas fa-search"></i>
       </div>
     </div>
   );
-};
-
-export default TopBar;
+}
