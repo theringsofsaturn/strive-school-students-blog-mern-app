@@ -6,6 +6,7 @@
     top: 0;
     display: flex;
     align-items: center;
+    /* TopBar will be over everything else if it collides with other elements. */
     z-index: 999;
     font-family: "Josefin Sans", sans-serif;
   }
