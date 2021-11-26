@@ -1,6 +1,7 @@
 .posts{
     flex: 9;
     display: flex;
-    flex-wrap: wrap;
+    /* use whole line, horizontal row, but if these children are too wide than the parent, they will wrap to the next line. */
+    flex-wrap: wrap; 
     margin: 20px;
 }
