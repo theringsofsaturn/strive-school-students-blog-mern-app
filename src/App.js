@@ -14,12 +14,14 @@ import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
 import Settings from "./pages/settings/Settings";
 import Login from "./pages/Login/Login";
+import Register from "./pages/register/Register";
 
 function App() {
   return (
     <Router>
       <Topbar />
-      <Login/>
+      <Register />
+      {/* <Login/> */}
       {/* <Settings/> */}
       {/* <Write/> */}
       {/* <Single /> */}
