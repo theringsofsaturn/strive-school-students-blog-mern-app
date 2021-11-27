@@ -37,3 +37,25 @@
     margin-top: 10px;
     margin-bottom: 10px;
   }
+
+  .settingsPP > img {
+    height: 70px;
+    width: 70px;
+    border-radius: 20px;
+    object-fit: cover;
+  }
+
+  .settingsPPIcon {
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 50%;
+    margin-left: 10px;
+    color: white;
+    background-color: lightcoral;
+    cursor: pointer;
+  }
