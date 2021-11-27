@@ -6,6 +6,7 @@ import cors from "cors"; // Cors is a middleware that allows us to connect to a 
 import dotenv from "dotenv"; // We need to import dotenv to use the .env file.
 import uniqid from "uniqid"; // To generate a unique id, we can use the uniqid package.
 import listEndpoints from "express-list-endpoints"; // List all endpoints in the console.
+import authRouter from "./routes/auth.js";
 
 dotenv.config(); // To make possible to use dotenv, and update the code and refresh after any change.
 
@@ -15,9 +16,10 @@ server.use(express.json()); // // This has to be specified BEFORE the routes, ot
 server.use(cors())
 
 /* ************ENDPOINTS******************* */
-
+// All of the endpoints will a prefix. for example /api/auth is the prefix for all the endpoints in auth.js
+server.use("/api/auth", authRouter)
 // *********************** ERROR MIDDLEWARES ***************************
-// always to be defined after all the routes
+// Always to be defined after all the routes
 
 // mongoose getting-started.js
 main().catch((err) => console.log(err));
@@ -29,7 +31,7 @@ async function main() {
 
 
 console.table(listEndpoints(server)); // To list all endpoints in the console.
-// //server to listen on the port specified.
+// Server to listen on the port specified.
 server.listen(port, () => {
   console.log("🧡 server is running on port: " + port);
 });
