@@ -12,13 +12,14 @@ import Posts from "../src/component/posts/Posts";
 import Homepage from "./pages/homepage/Homepage";
 import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
-// import SinglePost from './components/singlePost/SinglePost';
+import Settings from "./pages/settings/Settings";
 
 function App() {
   return (
     <Router>
       <Topbar />
-      <Write/>
+      <Settings/>
+      {/* <Write/> */}
       {/* <Single /> */}
       {/* <Homepage /> */}
     </Router>
