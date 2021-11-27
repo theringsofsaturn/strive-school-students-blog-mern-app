@@ -13,12 +13,14 @@ import Homepage from "./pages/homepage/Homepage";
 import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
 import Settings from "./pages/settings/Settings";
+import Login from "./pages/Login/Login";
 
 function App() {
   return (
     <Router>
       <Topbar />
-      <Settings/>
+      <Login/>
+      {/* <Settings/> */}
       {/* <Write/> */}
       {/* <Single /> */}
       {/* <Homepage /> */}
