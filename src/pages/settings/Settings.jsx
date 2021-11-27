@@ -27,11 +27,11 @@ const settings = () => {
             />
           </div>
           <label>Username</label>
-          <input type="text" placeholder="Safak" name="name" />
+          <input type="text" placeholder="Enter your username here..." name="name" />
           <label>Email</label>
-          <input type="email" placeholder="safak@gmail.com" name="email" />
+          <input type="email" placeholder="Enter your email here..." name="email" />
           <label>Password</label>
-          <input type="password" placeholder="Password" name="password" />
+          <input type="password" placeholder="Enter your password here..." name="password" />
           <button className="settingsSubmitButton" type="submit">
             Update
           </button>
