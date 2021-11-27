@@ -27,5 +27,11 @@ authRouter.post("/register", async (req, res) => {
 });
 
 // ************ LOGIN ***************
-
+authRouter.post("/login", async (req, res) => {
+    try {
+        
+    } catch (error) {
+        res.status(500).json({ message: "Something went wrong" });
+    }
+})
 export default authRouter;
