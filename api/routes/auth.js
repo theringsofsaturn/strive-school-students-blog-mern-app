@@ -1,4 +1,5 @@
-import User from "../models/User";
+import express from "express";
+import User from "../models/User.js";
 
 const authRouter = express.Router();
 
@@ -9,13 +10,17 @@ authRouter.post("/register", async (req, res) => {
     const newUser = new User({
       username: req.body.username,
       email: req.body.email,
-      password: hashedPass,
+      password: req.body.password,
     });
     // Save the new user. Method save() is a mongoose method. We can use it because we are using our User Schema.
     const user = await newUser.save();
     // Send the user back to the client with a status code. 
     res.status(200).json(user);
-  } catch {}
+  } catch {
+    res.status(500).json({ message: "Something went wrong" });
+  }
 });
 
 // ************ LOGIN ***************
+
+export default authRouter;
