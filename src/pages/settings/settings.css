@@ -59,3 +59,26 @@
     background-color: lightcoral;
     cursor: pointer;
   }
+
+  .settingsPPButton:focus {
+    outline-style: none;
+  }
+
+  .settingsForm > label {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  
+
+  .settingsPPInput {
+    width: 30%;
+  }
+
+  .settingsForm > input {
+  color: gray;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 30px;
+  border: none;
+  border-bottom: 1px solid lightgray;
+}
