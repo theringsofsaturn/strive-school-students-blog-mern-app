@@ -21,3 +21,25 @@
   display: flex;
   flex-direction: column;
 }
+
+.loginInput {
+    padding: 10px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+  }
+
+  .loginInput:focus {
+    outline: none;
+  }
+
+  .loginButton {
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: lightcoral;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+  }
