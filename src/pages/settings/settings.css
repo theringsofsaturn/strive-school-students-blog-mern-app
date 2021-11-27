@@ -7,15 +7,33 @@
   padding: 20px;
 }
 
-
 .settingsTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settingsTitleUpdate {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: lightcoral;
+}
+
+.settingsTitleDelete {
+  color: red;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+
+.settingsForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.settingsPP {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-  }
-  
-  .settingsTitleUpdate {
-    font-size: 30px;
-    margin-bottom: 20px;
-    color: lightcoral;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
