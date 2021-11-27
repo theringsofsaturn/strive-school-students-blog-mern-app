@@ -4,11 +4,11 @@ import "./posts.css";
 const Posts = () => {
   return (
     <div className="posts">
-     <Post img="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" />
-      <Post img="https://images.pexels.com/photos/6758029/pexels-photo-6758029.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-      <Post img="https://images.pexels.com/photos/6711867/pexels-photo-6711867.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
-      <Post img="https://images.pexels.com/photos/5490778/pexels-photo-5490778.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
-      <Post img="https://images.pexels.com/photos/4916559/pexels-photo-4916559.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+     <Post img="https://www.scnsoft.com/blog-pictures/cover-pics/react_js.png" />
+      <Post img="https://c4.wallpaperflare.com/wallpaper/619/468/16/node-js-javascript-wallpaper-preview.jpg" />
+      <Post img="https://wallpapercave.com/wp/wp8725088.jpg"/>
+      <Post img="https://raygun.com/blog/wp-content/uploads/2015/04/express1.png"/>
+      <Post img="https://daqxzxzy8xq3u.cloudfront.net/wp-content/uploads/2019/04/21032431/redux-cover-imgage-1024x768.jpg"/>
     </div>
   );
 };
