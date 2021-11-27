@@ -11,6 +11,10 @@ authRouter.post("/register", async (req, res) => {
       email: req.body.email,
       password: hashedPass,
     });
+    // Save the new user. Method save() is a mongoose method. We can use it because we are using our User Schema.
+    const user = await newUser.save();
+    // Send the user back to the client with a status code. 
+    res.status(200).json(user);
   } catch {}
 });
 
