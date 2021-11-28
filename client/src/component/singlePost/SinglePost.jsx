@@ -1,17 +1,39 @@
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import "./singlePost.css";
 
-const singlePost = () => {
+const SinglePost = () => {
+  const location = useLocation(); // Get the location from the URL. If we console log the location, we'll see the pathname with the post id "post/123456"
+  // console.log("Location Path", location);
+  const path = location.pathname.split("/")[2]; // Split the pathname by "/" and get the third element of the array -> [2] index. This is the post id. -> e.g. "/post/123456" -> ["before /", "post", "123456"] -> "123456"
+
+  // **************** STATES ********************
+  const [post, setPost] = useState({}); // Set the post state to an empty object. This will be filled with the post data.
+  const [title, setTitle] = useState(""); // Set the title state to an empty string. This will be filled with the post title.
+  const [desc, setDesc] = useState(""); // Set the description state to an empty string. This will be filled with the post description.
+
+  useEffect(() => {
+    const getPost = async () => {
+      const res = await axios.get("http://localhost:3001/api/posts/" + path);
+      // console.log("Response for Single Post", res);
+      setPost(res.data);
+      setTitle(res.data.title);
+      setDesc(res.data.desc);
+    };
+    getPost();
+  }, [path]);
+
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
-        <img
-          className="singlePostImg"
-          src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-          alt=""
-        />
+        {/* If there's post image, show it, if not, just don't show any image */}
+        {post.photo && (
+          <img className="singlePostImg" src={post.photo} alt="" />
+        )}
         <h1 className="singlePostTitle">
-          Lorem ipsum dolor
+          {post.title}
           <div className="singlePostEdit">
             <i className="singlePostIcon far fa-edit"></i>
             <i className="singlePostIcon far fa-trash-alt"></i>
@@ -20,47 +42,14 @@ const singlePost = () => {
         <div className="singlePostInfo">
           <span>
             Author:
-            <b className="singlePostAuthor">
-              <Link className="link" to="/posts?username=Safak">
-                Emilian
-              </Link>
-            </b>
+            <b className="singlePostAuthor">{post.username}</b>
           </span>
-          <span>1 day ago</span>
+          <span>{new Date(post.createdAt).toDateString()}</span>
         </div>
-        <p className="singlePostDesc">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error
-          quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit!
-          Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi
-          eos! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-          error quibusdam ipsa quis quidem doloribus eos, dolore ea iusto
-          impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas a
-          odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-          elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-          iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-          a odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-          elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-          iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-          a odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-          elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-          iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-          a odit modi eos!
-          <br />
-          <br />
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error
-          quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit!
-          Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi
-          eos! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-          error quibusdam ipsa quis quidem doloribus eos, dolore ea iusto
-          impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas a
-          odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-          elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-          iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-          a odit modi eos! Lorem, ipsum dolor sit amet consectetur.
-        </p>
+        <p className="singlePostDesc">{post.desc}</p>
       </div>
     </div>
   );
 };
 
-export default singlePost;
+export default SinglePost;
