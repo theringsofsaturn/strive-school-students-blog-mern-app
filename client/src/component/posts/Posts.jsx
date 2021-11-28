@@ -1,7 +1,7 @@
 import Post from "../post/Post";
 import "./posts.css";
 
-// Taking the {posts} from the props in the Homepage component
+// Taking the {posts} from the props in the Homepage.jsx component
 const Posts = ({ posts }) => {
   console.log("Posts Data fetched in Posts Component", posts);
   return (
