@@ -26,7 +26,7 @@ postsRouter.put("/:id", async (req, res) => {
     // if username of the post registered in the database is the same as the username of the user that is logged in, it means the user is the owner, then we can update the post.
     if (post.username === req.body.username) {
       try {
-          // Update the post with id in the URL with the properties that we have in the request body.
+        // Update the post with id in the URL with the properties that we have in the request body.
         const updatedPost = await Post.findByIdAndUpdate(
           req.params.id,
           {
@@ -47,4 +47,26 @@ postsRouter.put("/:id", async (req, res) => {
   }
 });
 
+// ************ DELETE POST **********************
+postsRouter.delete("/:id", async (req, res) => {
+  try {
+    // Find the post in we have in the URL params.
+    const post = await Post.findById(req.params.id);
+    // if username of the post registered in the database is the same as the username of the user that is logged in, it means the user is the owner, then we can delete the post.
+    if (post.username === req.body.username) {
+      try {
+          // Delete the post with id in the URL.
+        await post.delete();
+        // Send a status code and a message.
+        res.status(200).json("Post has been deleted...");
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    } else {
+      res.status(401).json("You can delete only your post!");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 export default postsRouter;
