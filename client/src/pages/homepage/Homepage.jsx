@@ -16,7 +16,7 @@ const Homepage = () => {
     const fetchPosts = async () => {
       const res = await axios.get("http://localhost:3001/api/posts" + search);
       setPosts(res.data);
-      console.log("Posts Data *****", res.data);
+      console.log("Posts Data Fetched in the Homepage", res.data);
     };
     fetchPosts();
   }, [search]);
@@ -25,8 +25,8 @@ const Homepage = () => {
     <>
       <Header />
       <div className="home">
-         {/* {posts} is the data we get from the api ==> 
-         passed as props to Posts Component  */}
+         {/* {posts} is the data we get from the api, stored in the state ==> 
+         I pass it as props to Posts Component  */}
         <Posts posts={posts} /> 
         <Sidebar />
       </div>
