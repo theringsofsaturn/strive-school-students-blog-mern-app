@@ -6,9 +6,11 @@ import cors from "cors"; // Cors is a middleware that allows us to connect to a 
 import dotenv from "dotenv"; // We need to import dotenv to use the .env file.
 import uniqid from "uniqid"; // To generate a unique id, we can use the uniqid package.
 import listEndpoints from "express-list-endpoints"; // List all endpoints in the console.
+import multer from "multer";
 import authRouter from "./routes/auth.js";
 import userRouter from "./routes/users.js";
 import postRouter from "./routes/posts.js";
+import categoryRouter from "./routes/categories.js";
 
 dotenv.config(); // To make possible to use dotenv, and update the code and refresh after any change.
 
@@ -17,11 +19,38 @@ const server = express(); // We need to create an express server.
 server.use(express.json()); // // This has to be specified BEFORE the routes, otherwise the body will be UNDEFINED
 server.use(cors())
 
-/* ************ENDPOINTS******************* */
+// ***************** MULTER ***********************
+// To upload images, we need to use multer.
+// First, we need to create a storage object.
+const storage = multer.diskStorage({
+  // This is the destination of the image. We will save it in the images folder. It accepts three parameters: request, file, callback. 
+  // request is the request object, file is the file object, and callback is the function that we will call when we are done. The callback function will have two parameters: error and the file.
+  destination: (req, file, cb) => {
+    cb(null, "images");
+  },
+  // This is the filename of the image. It accepts three parameters: request, file, callback.
+  filename: (req, file, cb) => {
+    // we can create here a filename but we will send this file name to our React app, so req.body.name
+    cb(null, req.body.name); // *NOTE* To test it in Postman, we need to write the name of the image in string here instead of req.body.name
+  },
+});
+// **Note** Basically, Multer is gonna take our file, and save it in the images folder. The filename will be the name which we are providing in the request body (req.body.name)
+
+// And to upload we will use the code below:
+const upload = multer({ storage: storage }); // As a storage we are using the storage we created above.
+// Upload on this endpoint, and upload single file, which name is "file".
+server.post("/api/upload", upload.single("file"), (req, res) => {
+  res.status(200).json("File has been uploaded");
+});
+
+//******************* ENDPOINTS ********************
 // All of the endpoints will a prefix. for example /api/auth is the prefix for all the endpoints in auth.js
 server.use("/api/auth", authRouter)
 server.use("/api/users", userRouter)
 server.use("/api/posts", postRouter)
+server.use("/api/categories", categoryRouter)
+
+
 
 // *********************** ERROR MIDDLEWARES ***************************
 // Always to be defined after all the routes
