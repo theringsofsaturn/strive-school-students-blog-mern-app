@@ -16,7 +16,7 @@ userRouter.put("/:id", async (req, res) => {
       req.body.password = await bcrypt.hash(req.body.password, salt);
     }
     try {
-      // Find the user by id. We indicate the id we have in the URL as a parameter (/:id). After that we can update the user. For that we use the "set" method.
+      // Update the user with the id we have in the URL as a parameter (/:id). For that we use the "set" method.
       const updatedUser = await User.findByIdAndUpdate(
         req.params.id,
         {
