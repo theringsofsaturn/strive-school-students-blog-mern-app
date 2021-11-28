@@ -20,7 +20,7 @@ const Homepage = () => {
       // console.log("Posts Data Fetched in the Homepage", res.data);
     };
     fetchPosts();
-  }, [search]);
+  }, [search]); // When the search query changes, we want to fetch the posts again.
 
   return (
     <>

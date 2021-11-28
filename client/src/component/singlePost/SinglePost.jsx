@@ -23,7 +23,7 @@ const SinglePost = () => {
       setDesc(res.data.desc);
     };
     getPost();
-  }, [path]);
+  }, [path]); // When the path changes, we want to fetch again.
 
   return (
     <div className="singlePost">
