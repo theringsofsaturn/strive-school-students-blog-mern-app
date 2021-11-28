@@ -9,6 +9,7 @@ import listEndpoints from "express-list-endpoints"; // List all endpoints in the
 import authRouter from "./routes/auth.js";
 import userRouter from "./routes/users.js";
 import postRouter from "./routes/posts.js";
+import categoryRouter from "./routes/categories.js";
 
 dotenv.config(); // To make possible to use dotenv, and update the code and refresh after any change.
 
@@ -22,6 +23,7 @@ server.use(cors())
 server.use("/api/auth", authRouter)
 server.use("/api/users", userRouter)
 server.use("/api/posts", postRouter)
+server.use("/api/categories", categoryRouter)
 
 // *********************** ERROR MIDDLEWARES ***************************
 // Always to be defined after all the routes
