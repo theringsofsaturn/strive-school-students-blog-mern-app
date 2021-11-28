@@ -82,4 +82,35 @@ postsRouter.get("/:id", async (req, res) => {
   }
 });
 
+// ************* GET ALL POSTS ********************
+postsRouter.get("/", async (req, res) => {
+  // To catch the queries in the URL, we use req.query. It's gonna look at the question mark /?/ and look for the key value pairs. The first value after ? is the query and after = is the value. Example: ?user=johndoe
+  const username = req.query.user; // This is for user
+  const catName = req.query.cat; // The same thing will be for category
+  try {
+    // If the user is logged in, we want to get the posts of the user that is logged in. If the user is not logged in, we want to get all the posts of that category.
+    // Create a posts array, because we will return this array as a response.
+    let posts;
+    // if there is a username
+    if (username) {
+      // If username in our database equals the username above (username in the URL as a query), meaning Post.find({ username:username })
+      posts = await Post.find({ username }); // After ES6, we can use this short syntax instead of Post.find({ username: username }). It's the same.
+    } // if there is a category name
+    else if (catName) {
+      // check if the category name is in the categories array of the post (we have an array of categories in the post in the database) To do this we use the $in operator.
+      posts = await Post.find({
+        categories: {
+          $in: [catName], // This basically means: Look at this category array, and if inside includes this category name (catName), just find this and assign to this posts variable (that is an array of posts).
+        },
+      });
+    } else {  // If there is no category name, it will fetch all the posts.
+      posts = await Post.find(); // There is no condition, so it will fetch all the posts.
+    }
+    // Send the posts back to the client with a status code.
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 export default postsRouter;
