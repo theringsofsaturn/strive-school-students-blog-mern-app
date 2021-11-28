@@ -55,7 +55,7 @@ postsRouter.delete("/:id", async (req, res) => {
     // if username of the post registered in the database is the same as the username of the user that is logged in, it means the user is the owner, then we can delete the post.
     if (post.username === req.body.username) {
       try {
-          // Delete the post with id in the URL.
+        // Delete the post with id in the URL.
         await post.delete();
         // Send a status code and a message.
         res.status(200).json("Post has been deleted...");
@@ -69,4 +69,17 @@ postsRouter.delete("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+//GET POST
+postsRouter.get("/:id", async (req, res) => {
+  try {
+    // Find the post in we have in the URL params.
+    const post = await Post.findById(req.params.id);
+    // Send the post back to the client with a status code.
+    res.status(200).json(post);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 export default postsRouter;
