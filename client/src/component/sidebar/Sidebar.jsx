@@ -5,8 +5,8 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebarItem">
-        <span className="sidebarTitle">ABOUT ME</span>
-        <img src="https://wallpapercave.com/dwp1x/wp2465945.jpg" alt="" />
+        <span className="sidebarTitle">ABOUT US</span>
+        <img src="https://app.strive.school/assets/images/strive_logo_color.svg" alt="" />
         <p>
           Laboris sunt aute cupidatat velit magna velit ullamco dolore mollit
           amet ex esse.Sunt eu ut nostrud id quis proident.

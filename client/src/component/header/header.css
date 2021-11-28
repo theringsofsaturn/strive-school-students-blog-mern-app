@@ -20,12 +20,13 @@
     position: absolute;
     top: 20%;
     font-size: 100px;
+    color: rgb(1, 255, 132)
   }
   
   .headerImg {
     width: 100%;
-    height: 450px;
-    margin-top: 115px;
+    height: auto;
+    margin-top: 130px;
     object-fit: cover;
   }
   
