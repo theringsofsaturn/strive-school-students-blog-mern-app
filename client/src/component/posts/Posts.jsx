@@ -3,7 +3,7 @@ import "./posts.css";
 
 // Taking the {posts} from the props in the Homepage.jsx component
 const Posts = ({ posts }) => {
-  console.log("Posts Data fetched in Posts Component", posts);
+  // console.log("Posts Data fetched in Posts Component", posts);
   return (
     //********** NEW DYNAMIC CODE *********
     <div className="posts">

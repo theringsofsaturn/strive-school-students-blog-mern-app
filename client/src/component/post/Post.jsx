@@ -5,7 +5,7 @@ import "./post.css";
 const Post = ({ post }) => {
   return (
     <div className="post">
-      {/* If there's image, show it, if not, just don't show any image */}
+      {/* If there's post image, show it, if not, just don't show any image */}
       {post.photo && <img className="postImg" src={post.photo} alt="" />}
       <div className="postInfo">
         <div className="postCats">

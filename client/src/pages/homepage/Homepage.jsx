@@ -7,8 +7,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Homepage = () => {
-  const [posts, setPosts] = useState([]);
-  const { search } = useLocation();
+  // ************** STATES **************
+  const [posts, setPosts] = useState([]); // Set the post state to an empty object. This will be filled with the post data.
+  const { search } = useLocation(); // Get the search query from the url.
 
   useEffect(() => {
       // *************** FETCHING POSTS ********************
@@ -16,7 +17,7 @@ const Homepage = () => {
     const fetchPosts = async () => {
       const res = await axios.get("http://localhost:3001/api/posts" + search);
       setPosts(res.data);
-      console.log("Posts Data Fetched in the Homepage", res.data);
+      // console.log("Posts Data Fetched in the Homepage", res.data);
     };
     fetchPosts();
   }, [search]);
