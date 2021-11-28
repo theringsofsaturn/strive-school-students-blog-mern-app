@@ -11,11 +11,12 @@ const Homepage = () => {
   const { search } = useLocation();
 
   useEffect(() => {
+      // *************** FETCHING POSTS ********************
     // When we want to use axios, we need a variable to store the response, as we are using async/await
     const fetchPosts = async () => {
       const res = await axios.get("http://localhost:3001/api/posts" + search);
       setPosts(res.data);
-      console.log("Posts Data *****",res.data);
+      console.log("Posts Data *****", res.data);
     };
     fetchPosts();
   }, [search]);
@@ -24,7 +25,9 @@ const Homepage = () => {
     <>
       <Header />
       <div className="home">
-        <Posts posts={posts} />
+         {/* {posts} is the data we get from the api ==> 
+         passed as props to Posts Component  */}
+        <Posts posts={posts} /> 
         <Sidebar />
       </div>
     </>
