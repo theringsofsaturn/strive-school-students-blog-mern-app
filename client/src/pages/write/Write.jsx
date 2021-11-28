@@ -5,7 +5,7 @@ const Write = () => {
     <div className="write">
       <img
         className="writeImg"
-        src="https://i.pinimg.com/564x/cb/6d/07/cb6d07ce3ed6d97d88b0140963844161.jpg"
+        src="https://strive.school/assets/generics/covers/fullstack.png"
         alt=""
       />
       <form className="writeForm">
