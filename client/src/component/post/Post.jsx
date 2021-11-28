@@ -15,7 +15,6 @@ const Post = ({ post }) => {
           ))}
         </div>
         {/* When click on the title, it will redirect to the post page */}
-        {/* className="link" to remove the custom link style */}
         <Link to={`/post/${post._id}`} className="link"> 
           <span className="postTitle">{post.title}</span>
         </Link>

@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import "./singlePost.css";
 
 const SinglePost = () => {
-  const location = useLocation(); // Get the location from the URL. If we console log the location, we'll see the pathname with the post id "post/123456"
+  const location = useLocation(); // Get the location from the URL. If we console log the location, we'll see the pathname property with the post id "post/123456" value
   // console.log("Location Path", location);
   const path = location.pathname.split("/")[2]; // Split the pathname by "/" and get the third element of the array -> [2] index. This is the post id. -> e.g. "/post/123456" -> ["before /", "post", "123456"] -> "123456"
 
@@ -23,7 +23,7 @@ const SinglePost = () => {
       setDesc(res.data.desc);
     };
     getPost();
-  }, [path]);
+  }, [path]); // When the path changes, we want to fetch again.
 
   return (
     <div className="singlePost">
@@ -40,9 +40,12 @@ const SinglePost = () => {
           </div>
         </h1>
         <div className="singlePostInfo">
-          <span>
+          <span className="singlePostAuthor">
+            {/* When we click on the username it will redirect to the Homepage with a search query of the username. This will show the posts of that user. */}
             Author:
-            <b className="singlePostAuthor">{post.username}</b>
+            <Link to={`/?user=${post.username}`} className="link">
+              <b> {post.username}</b>
+            </Link>
           </span>
           <span>{new Date(post.createdAt).toDateString()}</span>
         </div>
