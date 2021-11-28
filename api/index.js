@@ -7,6 +7,7 @@ import dotenv from "dotenv"; // We need to import dotenv to use the .env file.
 import uniqid from "uniqid"; // To generate a unique id, we can use the uniqid package.
 import listEndpoints from "express-list-endpoints"; // List all endpoints in the console.
 import authRouter from "./routes/auth.js";
+import userRouter from "./routes/users.js";
 
 dotenv.config(); // To make possible to use dotenv, and update the code and refresh after any change.
 
@@ -18,6 +19,8 @@ server.use(cors())
 /* ************ENDPOINTS******************* */
 // All of the endpoints will a prefix. for example /api/auth is the prefix for all the endpoints in auth.js
 server.use("/api/auth", authRouter)
+server.use("/api/users", userRouter)
+
 // *********************** ERROR MIDDLEWARES ***************************
 // Always to be defined after all the routes
 
@@ -28,7 +31,6 @@ async function main() {
   await mongoose.connect(process.env.MONGO_URL);
   console.log("😎 DB is running succesfully")
 }
-
 
 console.table(listEndpoints(server)); // To list all endpoints in the console.
 // Server to listen on the port specified.
