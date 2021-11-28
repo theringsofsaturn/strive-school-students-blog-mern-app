@@ -9,13 +9,14 @@ import axios from "axios";
 const Homepage = () => {
   // ************** STATES **************
   const [posts, setPosts] = useState([]); // Set the post state to an empty object. This will be filled with the post data.
-  const { search } = useLocation(); // Get the search query from the url.
+  const { search } = useLocation(); // Get the search query from the url. If we console.log location for const location = useLocation() we'll see a search property and a value of "?search=something", in our case "?search=user=theringsofsaturn". so, instead of writing location = useLocation(), we just take the "search" property and write: { search } = useLocation()
+  // We want this, so when we can get the posts by a specific user.
 
   useEffect(() => {
-      // *************** FETCHING POSTS ********************
+    // *************** FETCHING POSTS ********************
     // When we want to use axios, we need a variable to store the response, as we are using async/await
     const fetchPosts = async () => {
-      const res = await axios.get("http://localhost:3001/api/posts" + search);
+      const res = await axios.get("http://localhost:3001/api/posts" + search); // Fetching posts by a user.
       setPosts(res.data);
       // console.log("Posts Data Fetched in the Homepage", res.data);
     };
@@ -26,9 +27,9 @@ const Homepage = () => {
     <>
       <Header />
       <div className="home">
-         {/* {posts} is the data we get from the api, stored in the state ==> 
+        {/* {posts} is the data we get from the api, stored in the state ==> 
          I pass it as props to Posts Component  */}
-        <Posts posts={posts} /> 
+        <Posts posts={posts} />
         <Sidebar />
       </div>
     </>
