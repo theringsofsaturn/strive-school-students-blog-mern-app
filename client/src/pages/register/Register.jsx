@@ -19,9 +19,11 @@ const Register = () => {
         email,
         password,
       });
+      console.log("Registration Data",res);
+      // If the response is successful and there are no errors, then redirect to the login page.
       res.data && window.location.replace("/login");
     } catch (err) {
-      setError(true);
+      setError(true); // If any error, set the error state to true. The user will need to write the correct data. 
     }
   };
 
@@ -54,7 +56,12 @@ const Register = () => {
           Register
         </button>
       </form>
-      <button className="registerLoginButton">Login</button>
+      <button className="registerLoginButton">
+        <Link className="link" to="/login">
+          Login
+        </Link>
+      </button>
+      {error && <span style={{color:"red", marginTop:"10px"}}>Something went wrong!</span>}
     </div>
   );
 };
