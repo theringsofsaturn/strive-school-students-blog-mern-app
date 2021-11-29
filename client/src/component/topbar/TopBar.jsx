@@ -6,7 +6,8 @@ export default function Topbar() {
   return (
     <div className="top">
       <div className="topLeft">
-        <img className="logo-left"
+        <img
+          className="logo-left"
           src="https://strive.school/assets/strive_logo_color.svg"
           alt=""
         />
@@ -29,21 +30,20 @@ export default function Topbar() {
           </li>
           <li className="topListItem">ABOUT</li>
           {/* <li className="topListItem">CONTACT</li> */}
-          
+
           {user && <li className="topListItem">LOGOUT</li>}
         </ul>
       </div>
       <div className="topRight">
-        {user ? (
-          <Link className="link" to="/settings">
-            <img
-              className="topImg"
-              src="https://images.gr-assets.com/users/1632342929p8/140785582.jpg"
-              alt=""
-            />
-          </Link>
-        ) : (
-          <ul className="topList">
+        <Link className="link" to="/settings">
+          <img
+            className="topImg"
+            src="https://images.gr-assets.com/users/1632342929p8/140785582.jpg"
+            alt=""
+          />
+        </Link>
+
+        <ul className="topList">
             <li className="topListItem">
               <Link className="link" to="/login">
                 LOGIN
@@ -55,7 +55,7 @@ export default function Topbar() {
               </Link>
             </li>
           </ul>
-        )}
+
         <i className="topSearchIcon fas fa-search"></i>
       </div>
     </div>

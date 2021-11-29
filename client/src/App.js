@@ -17,7 +17,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/register/Register";
 
 function App() {
-  const currentUser = true;
+  const currentUser = false;
   return (
     <Router>
       <Topbar />
@@ -28,7 +28,7 @@ function App() {
 
         <Route
           path="/register"
-          element={currentUser ? <Homepage /> : <Register />}
+          element={<Register />} // NEED TO FIX THE CONDITION FOR THE REACT ROUTER UPDATE VERSION 6, BECAUSE DON'T WORK.
         />
 
         <Route path="/login" element={currentUser ? <Homepage /> : <Login />} />
@@ -41,6 +41,11 @@ function App() {
           path="/settings"
           element={currentUser ? <Settings /> : <Login />}
         />
+
+        {/* <Route path="/register">{user ? <Home /> : <Register />}</Route>
+        <Route path="/login">{user ? <Home /> : <Login />}</Route>
+        <Route path="/write">{user ? <Write /> : <Register />}</Route>
+        <Route path="/settings">{user ? <Settings /> : <Register />}</Route> */}
       </Routes>
     </Router>
   );
