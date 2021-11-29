@@ -28,19 +28,23 @@ function App() {
 
         <Route
           path="/register"
-          element={<Register />} // NEED TO FIX THE CONDITION FOR THE REACT ROUTER UPDATE VERSION 6, BECAUSE DON'T WORK.
+          element={currentUser ? <Homepage /> : <Register />}
         />
 
         <Route path="/login" element={currentUser ? <Homepage /> : <Login />} />
 
         <Route path="/post/:id" element={<Single />} />
 
-        <Route path="/write" element={currentUser ? <Write /> : <Login />} />
+        {/* Will enable after enabling the user */}
+        {/* <Route path="/write" element={currentUser ? <Write /> : <Login />} /> */}
+        <Route path="/write" element={<Write />} />
 
-        <Route
+        <Route path="/settings" element={<Settings />} />
+         {/* Will enable after enabling the user */}
+        {/* <Route
           path="/settings"
           element={currentUser ? <Settings /> : <Login />}
-        />
+        /> */}
 
         {/* <Route path="/register">{user ? <Home /> : <Register />}</Route>
         <Route path="/login">{user ? <Home /> : <Login />}</Route>
