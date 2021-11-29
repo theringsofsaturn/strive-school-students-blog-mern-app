@@ -20,4 +20,5 @@ export const LoginSuccess = (user) => ({
 
 export const LoginFailure = () => ({
     type: "LOGIN_FAILURE",
+    // No need to pass payload, because we will get the error message from the server.
   });
