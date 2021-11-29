@@ -6,7 +6,7 @@ const Reducer = (state, action) => {
     case "LOGIN_START":
       return {
         user: null,
-        isFetching: true, // Because we starting our proccess, fetching data.
+        isFetching: true, // Because we starting our proccess, fetching data. 
         error: false, // In this case we don't have an error, because we are still fetching...
       };
     case "LOGIN_SUCCESS":
@@ -21,6 +21,7 @@ const Reducer = (state, action) => {
         isFetching: false, // We are not fetching anymore. We finished this process again.
         error: true, // We have an error, so...
       };
+    
 
     // If we don't have any of these cases, do nothing, just return the old state. Nothing will be changed.
     default:
