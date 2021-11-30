@@ -13,39 +13,29 @@ import Homepage from "./pages/homepage/Homepage";
 import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
 import Settings from "./pages/settings/Settings";
-import Login from "./pages/Login/Login";
+import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import { useContext } from "react";
+import { Context } from "../src/context/Context";
 
 function App() {
-  const currentUser = false;
+  const { user } = useContext(Context);
   return (
     <Router>
       <Topbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
-
         <Route path="/posts" element={<Homepage />} />
-
-        <Route
-          path="/register"
-          element={currentUser ? <Homepage /> : <Register />}
-        />
-
-        <Route path="/login" element={currentUser ? <Homepage /> : <Login />} />
-
+        <Route path="/register" element={user ? <Homepage /> : <Register />} />
+        <Route path="/login" element={user ? <Homepage /> : <Login />} />
         <Route path="/post/:id" element={<Single />} />
+        <Route path="/write" element={user ? <Write /> : <Login />} />
+        <Route path="/settings" element={user ? <Settings /> : <Login />} />
 
-        {/* Will enable after enabling the user */}
-        {/* <Route path="/write" element={currentUser ? <Write /> : <Login />} /> */}
-        <Route path="/write" element={<Write />} />
-
-        <Route path="/settings" element={<Settings />} />
-         {/* Will enable after enabling the user */}
-        {/* <Route
-          path="/settings"
-          element={currentUser ? <Settings /> : <Login />}
-        /> */}
-
+        {/* Old react-router-dom syntax */}
+        {/* <Route exact path="/">
+          <Home />
+        </Route> */}
         {/* <Route path="/register">{user ? <Home /> : <Register />}</Route>
         <Route path="/login">{user ? <Home /> : <Login />}</Route>
         <Route path="/write">{user ? <Write /> : <Register />}</Route>
