@@ -44,8 +44,8 @@ const SinglePost = () => {
     try {
       await axios.put(`http://localhost:3001/api/posts/${post._id}`, {
         username: user.username,
-        title,
-        desc,
+        title, // (same as title: title) We have the variable title in the state. Since they are the same name, we can use only 'title'
+        desc, // (same as desc: desc)
       });
       setUpdateMode(false);
     } catch (err) {}
@@ -74,7 +74,7 @@ const SinglePost = () => {
         ) : (
           // And if it's not in update mode, show the h1 title
           <h1 className="singlePostTitle">
-            {post.title}
+            {title}
             {/* If the post's username is the same as the logged in user, then we can edit or delete the post. Also if there's no user (user?) it will not check for any username after, so we will not have any error */}
             {post.username === user?.username && (
               <div className="singlePostEdit">
@@ -107,7 +107,12 @@ const SinglePost = () => {
             onChange={(e) => setDesc(e.target.value)}
           />
         ) : (
-          <p className="singlePostDesc">{post.desc}</p>
+          <p className="singlePostDesc">{desc}</p>
+        )}
+        {updateMode && (
+          <button className="singlePostButton" onClick={handleUpdate}>
+            Update
+          </button>
         )}
       </div>
     </div>
