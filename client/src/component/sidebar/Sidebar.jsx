@@ -24,16 +24,17 @@ const Sidebar = () => {
           alt=""
         />
         <p>
-          Laboris sunt aute cupidatat velit magna velit ullamco dolore mollit
-          amet ex esse.Sunt eu ut nostrud id quis proident.
+          The virtual coding school that invests in your career Become a
+          Software Engineer or Data Scientist by learning remotely, pay tuition
+          only once you're hired.
         </p>
       </div>
       <div className="sidebarItem">
         <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
-        {cats.map((category) => (
+          {cats.map((category) => (
             <Link to={`/?cat=${category.name}`} className="link">
-            <li className="sidebarListItem">{category.name}</li>
+              <li className="sidebarListItem">{category.name}</li>
             </Link>
           ))}
         </ul>
