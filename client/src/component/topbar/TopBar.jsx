@@ -6,8 +6,9 @@ import "./topbar.css";
 export default function TopBar() {
   const { user, dispatch } = useContext(Context);
 
+  // LOGOUT
   const handleLogout = () => {
-    dispatch({ type: "LOGOUT" });
+    dispatch({ type: "LOGOUT" }); 
   };
   return (
     <div className="top">
@@ -56,16 +57,18 @@ export default function TopBar() {
             </Link>
           </li>
           <li className="topListItem" onClick={handleLogout}>
+            {/* If there's user, on click Logout */}
             {user && "LOGOUT"}
           </li>
         </ul>
       </div>
       <div className="topRight">
+        {/* If there's user, link to Settings page */}
         {user ? (
           <Link to="/settings">
             <img
               className="topImg"
-              src="https://images.gr-assets.com/users/1632342929p8/140785582.jpg"
+              src={user.profilePic}
               alt=""
             />
           </Link>

@@ -7,6 +7,9 @@ import dotenv from "dotenv"; // We need to import dotenv to use the .env file.
 import uniqid from "uniqid"; // To generate a unique id, we can use the uniqid package.
 import listEndpoints from "express-list-endpoints"; // List all endpoints in the console.
 import multer from "multer";
+import path from "path";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import authRouter from "./routes/auth.js";
 import userRouter from "./routes/users.js";
 import postRouter from "./routes/posts.js";
@@ -17,7 +20,10 @@ dotenv.config(); // To make possible to use dotenv, and update the code and refr
 const port = 3001; // To define the port we want to use.
 const server = express(); // We need to create an express server.
 server.use(express.json()); // // This has to be specified BEFORE the routes, otherwise the body will be UNDEFINED
-server.use(cors())
+server.use(cors()) // To allow the frontend to connect to the backend.
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+server.use("/images", express.static(path.join(__dirname, "/images"))); // To make the images folder accessible and public.
 
 // ***************** MULTER ***********************
 // To upload images, we need to use multer.

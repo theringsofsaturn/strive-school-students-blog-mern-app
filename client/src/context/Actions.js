@@ -2,7 +2,7 @@
 
 // So, in terms of Context API (or Redux also):
 // 1. LOGIN START:
-// We will send our credentials (username and password). 
+// We will send our credentials (username and password).
 // 2. LOGIN SUCCESS:
 // If it is successful, we will get the response from the server, which is our user information. After that we will update our state. The states will not be NULL anymore, but it will be username, email, etc etc...
 // 3. LOGIN FAILURE:
@@ -17,8 +17,11 @@ export const LoginSuccess = (user) => ({
   payload: user,
 });
 
-
 export const LoginFailure = () => ({
-    type: "LOGIN_FAILURE",
-    // No need to pass payload, because we will get the error message from the server.
-  });
+  type: "LOGIN_FAILURE",
+  // No need to pass payload, because we will get the error message from the server.
+});
+
+export const Logout = () => ({
+  type: "LOGOUT",
+});

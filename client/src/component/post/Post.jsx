@@ -3,10 +3,13 @@ import "./post.css";
 
 // Taking the {post} from the props in the Posts.jsx component
 const Post = ({ post }) => {
+  const publicFolder = "http://localhost:3001/images/"; //Images in /api/images/
   return (
     <div className="post">
       {/* If there's post image, show it, if not, just don't show any image */}
-      {post.photo && <img className="postImg" src={post.photo} alt="" />}
+      {post.photo && (
+        <img className="postImg" src={publicFolder + post.photo} alt="" />
+      )}
       <div className="postInfo">
         <div className="postCats">
           {/* For each category in the categories array, render this span ({category.name}) */}
@@ -15,7 +18,7 @@ const Post = ({ post }) => {
           ))}
         </div>
         {/* When click on the title, it will redirect to the post page */}
-        <Link to={`/post/${post._id}`} className="link"> 
+        <Link to={`/post/${post._id}`} className="link">
           <span className="postTitle">{post.title}</span>
         </Link>
         <hr />

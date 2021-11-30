@@ -10,9 +10,10 @@ const SinglePost = () => {
   const path = location.pathname.split("/")[2]; // Split the pathname by "/" and get the third element of the array -> [2] index. This is the post id. -> e.g. "/post/123456" -> ["before /", "post", "123456"] -> "123456"
 
   // **************** STATES ********************
-  const [post, setPost] = useState({}); // Set the post state to an empty object. This will be filled with the post data.
-  const [title, setTitle] = useState(""); // Set the title state to an empty string. This will be filled with the post title.
-  const [desc, setDesc] = useState(""); // Set the description state to an empty string. This will be filled with the post description.
+  const [post, setPost] = useState({}); 
+  const [title, setTitle] = useState(""); 
+  const [desc, setDesc] = useState(""); 
+  const publicFolder = "http://localhost:3001/images/";
 
   useEffect(() => {
     const getPost = async () => {
@@ -30,7 +31,7 @@ const SinglePost = () => {
       <div className="singlePostWrapper">
         {/* If there's post image, show it, if not, just don't show any image */}
         {post.photo && (
-          <img className="singlePostImg" src={post.photo} alt="" />
+          <img src={publicFolder + post.photo} alt="" className="singlePostImg" />
         )}
         <h1 className="singlePostTitle">
           {post.title}
