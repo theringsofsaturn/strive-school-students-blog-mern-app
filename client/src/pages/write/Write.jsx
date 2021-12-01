@@ -17,7 +17,7 @@ const Write = () => {
       title,
       desc,
     };
-    // We will not send the above directly, because we can upload any image heere. In this case, if there's an image, create a formData and a filename.
+    // We will not send the above directly, because we can upload any image here. In this case, if there's an image, create a formData and a filename.
     // **Note** For the filename, it should be some random number, we can use any id or we can use a basic one, like using the date. If we don't do this, the user can upload the same image multiple times, different images with the same name, and we want to prevent that.
     if (file) {
       const data = new FormData();
