@@ -1,6 +1,7 @@
 import "./write.css";
 import { useContext, useState } from "react";
 import axios from "axios";
+import axiosInstance from "../../config";
 import { Context } from "../../context/Context";
 
 const Write = () => {
@@ -27,12 +28,12 @@ const Write = () => {
       data.append("file", file);
       newPost.photo = filename;
       try {
-        await axios.post("http://localhost:3001/api/upload", data);
+        await axiosInstance.post("/upload", data);
       } catch (err) {}
     }
     // After uploading the image, we can finally post.
     try {
-      const res = await axios.post("http://localhost:3001/api/posts", newPost);
+      const res = await axiosInstance.post("/posts", newPost);
       // After posting the new post, we want to go the Single Page (Post page)
       window.location.replace("/post/" + res.data._id);
     } catch (err) {
@@ -64,7 +65,7 @@ const Write = () => {
             type="text"
             autoFocus={true}
             // When we type in the title, it will change the state.
-            onChange={(e) => setTitle(e.target.value)} 
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         <div className="writeFormGroup">

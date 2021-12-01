@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import axiosInstance from "../../config";
 import "./sidebar.css";
 
 const Sidebar = () => {
@@ -8,7 +9,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     const getCats = async () => {
-      const res = await axios.get("http://localhost:3001/api/categories");
+      const res = await axiosInstance.get("/categories");
       // console.log("Categories Data fetched in the Sidebar", res.data);
       setCats(res.data);
     };

@@ -1,6 +1,7 @@
 import "./register.css";
 import { useState } from "react";
 import axios from "axios";
+import axiosInstance from "../../config"
 import { Link } from "react-router-dom";
 
 const Register = () => {
@@ -13,7 +14,7 @@ const Register = () => {
     e.preventDefault(); // To prevent refrshing after submitting
     setError(false); // Reset the error state to false.
     try {
-      const res = await axios.post("http://localhost:3001/api/auth/register", {
+      const res = await axiosInstance.post("/auth/register", {
         // Will send this data when registering as specified in the backend as required.
         username,
         email,
