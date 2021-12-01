@@ -16,7 +16,7 @@ const Settings = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // dispatch({ type: "UPDATE_START" });
+    dispatch({ type: "UPDATE_START" });
     const updatedUser = {
       userId: user._id,
       username,
@@ -39,12 +39,9 @@ const Settings = () => {
         updatedUser
       );
       setSuccess(true);
-      // dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
-      console.log("Update User", res.data);
-      console.log("Update User", updatedUser);
+      dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
     } catch (err) {
-      console.log("Update User Catch err", err);
-      // dispatch({ type: "UPDATE_FAILURE" });
+      dispatch({ type: "UPDATE_FAILURE" });
     }
   };
 
