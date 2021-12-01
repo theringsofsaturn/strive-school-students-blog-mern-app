@@ -1,40 +1,108 @@
-import Sidebar from "../../component/sidebar/Sidebar"; 
-import "./settings.css"
+import "./settings.css";
+import Sidebar from "../../component/sidebar/Sidebar";
+import axios from "axios";
+import { useContext, useState } from "react";
+import { Context } from "../../context/Context";
 
-const settings = () => {
+const Settings = () => {
+  const [file, setFile] = useState(null);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const { user, dispatch } = useContext(Context);
+  const publicFolder = "http://localhost:3001/images/";
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // dispatch({ type: "UPDATE_START" });
+    const updatedUser = {
+      userId: user._id,
+      username,
+      email,
+      password,
+    };
+    if (file) {
+      const data = new FormData();
+      const filename = Date.now() + file.name;
+      data.append("name", filename);
+      data.append("file", file);
+      updatedUser.profilePic = filename;
+      try {
+        await axios.post("http://localhost:3001/api/upload", data);
+      } catch (err) {}
+    }
+    try {
+    const  res = await axios.put(
+        "http://localhost:3001/api/users/" + user._id,
+        updatedUser
+      );
+      setSuccess(true);
+      // dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
+      console.log("Update User", res.data);
+      console.log("Update User", updatedUser);
+    } catch (err) {
+      console.log("Update User Catch err", err);
+      // dispatch({ type: "UPDATE_FAILURE" });
+    }
+  };
+
   return (
     <div className="settings">
       <div className="settingsWrapper">
         <div className="settingsTitle">
-          <span className="settingsTitleUpdate">Update Your Account</span>
-          <span className="settingsTitleDelete">Delete Account</span>
+          <span className="settingsUpdateTitle">Update Your Account</span>
+          <span className="settingsDeleteTitle">Delete Account</span>
         </div>
-        <form className="settingsForm">
+        <form className="settingsForm" onSubmit={handleSubmit}>
           <label>Profile Picture</label>
           <div className="settingsPP">
             <img
-              src="https://images.unsplash.com/photo-1588412079929-790b9f593d8e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+              src={
+                file
+                  ? URL.createObjectURL(file)
+                  : publicFolder + user.profilePic
+              }
               alt=""
             />
             <label htmlFor="fileInput">
-              <i className="settingsPPIcon far fa-user-circle"></i>{" "}
+              <i className="settingsPPIcon far fa-user-circle"></i>
             </label>
             <input
-              id="fileInput"
               type="file"
+              id="fileInput"
               style={{ display: "none" }}
-              className="settingsPPInput"
+              onChange={(e) => setFile(e.target.files[0])}
             />
           </div>
           <label>Username</label>
-          <input type="text" placeholder="Enter your username here..." name="name" />
+          <input
+            type="text"
+            placeholder={user.username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
           <label>Email</label>
-          <input type="email" placeholder="Enter your email here..." name="email" />
+          <input
+            type="email"
+            placeholder={user.email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <label>Password</label>
-          <input type="password" placeholder="Enter your password here..." name="password" />
-          <button className="settingsSubmitButton" type="submit">
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="settingsSubmit" type="submit">
             Update
           </button>
+          {success && (
+            <span
+              style={{ color: "green", textAlign: "center", marginTop: "20px" }}
+            >
+              Profile has been updated...
+            </span>
+          )}
         </form>
       </div>
       <Sidebar />
@@ -42,4 +110,4 @@ const settings = () => {
   );
 };
 
-export default settings;
+export default Settings;

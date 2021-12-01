@@ -53,7 +53,7 @@ authRouter.post("/login", async (req, res) => {
     // ** if we don't add _doc, we will get every kind of property from the user. So, we need user._doc. It will return the user with the properties defined in the schema.
     res.status(200).json(others); // send back other properties without the password.
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong" });
+    console.log(error);
   }
 });
 export default authRouter;
