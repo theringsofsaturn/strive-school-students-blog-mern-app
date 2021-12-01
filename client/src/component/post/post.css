@@ -10,12 +10,14 @@
   height: 280px;
   object-fit: cover;
   border-radius: 7px;
+
 }
 
 .postInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
+    margin-top: 15px;
 }
 
 .postCat {
