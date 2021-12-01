@@ -24,9 +24,8 @@ const Sidebar = () => {
           alt=""
         />
         <p>
-          The virtual coding school that invests in your career Become a
-          Software Engineer or Data Scientist by learning remotely, pay tuition
-          only once you're hired.
+         I am Emilian Kasemi. <br/>
+         I'm a Full-Stack Developer, graduating from Strive School.
         </p>
       </div>
       <div className="sidebarItem">
