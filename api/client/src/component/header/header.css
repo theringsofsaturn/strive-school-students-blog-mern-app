@@ -1,0 +1,35 @@
+.header {
+    /* margin-top: 60px; */
+  }
+  
+  .headerTitles {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .headerTitleSm {
+    position: absolute;
+    top: 18%;
+    font-size: 30px;
+  }
+  
+  .headerTitleLg {
+    position: absolute;
+    top: 20%;
+    font-size: 100px;
+    color: rgb(1, 255, 132)
+  }
+
+  .headerImgTitle{
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .headerImg {
+    width: 100%;
+    height: auto;
+    margin-top: 130px;
+    object-fit: cover;
+  }
+  

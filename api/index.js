@@ -56,6 +56,14 @@ server.use("/api/users", userRouter)
 server.use("/api/posts", postRouter)
 server.use("/api/categories", categoryRouter)
 
+// Middleware to tell to Express app that we are using this directory as a static folder. This is when we deploy our app.
+server.use(express.static(path.join(__dirname, "/client/build")));
+// When the application gets any request, it will redirect to this path, which is 'client' folder. It will redirect to 'client' folder, and it will look inside 'build' folder (that we don't have yet, but during deployment, Heroku will create it for us) and in the end will use index.html file to display the content in the broweser.
+server.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+});
+
+
 
 
 // *********************** ERROR MIDDLEWARES ***************************
@@ -71,6 +79,7 @@ async function main() {
 
 console.table(listEndpoints(server)); // To list all endpoints in the console.
 // Server to listen on the port specified.
-server.listen(port, () => {
+server.listen(process.env.PORT || port>
+  , () => {
   console.log("🧡 server is running on port: " + port);
 });
