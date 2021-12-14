@@ -73,13 +73,12 @@ server.get('*', (req, res) => {
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect(process.env.MONGO_URL);
+  await mongoose.connect("mongodb+srv://ishmael:dostojevski@cluster0.oqgfe.mongodb.net/myBlog?retryWrites=true&w=majority");
   console.log("😎 DB is running succesfully")
 }
 
 console.table(listEndpoints(server)); // To list all endpoints in the console.
 // Server to listen on the port specified.
-server.listen(process.env.PORT || port>
-  , () => {
+server.listen(process.env.PORT || port, () => {
   console.log("🧡 server is running on port: " + port);
 });
