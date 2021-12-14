@@ -8,8 +8,8 @@ import uniqid from "uniqid"; // To generate a unique id, we can use the uniqid p
 import listEndpoints from "express-list-endpoints"; // List all endpoints in the console.
 import multer from "multer";
 import path from "path";
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 import authRouter from "./routes/auth.js";
 import userRouter from "./routes/users.js";
 import postRouter from "./routes/posts.js";
@@ -20,7 +20,7 @@ dotenv.config(); // To make possible to use dotenv, and update the code and refr
 const port = 3001; // To define the port we want to use.
 const server = express(); // We need to create an express server.
 server.use(express.json()); // // This has to be specified BEFORE the routes, otherwise the body will be UNDEFINED
-server.use(cors()) // To allow the frontend to connect to the backend.
+server.use(cors()); // To allow the frontend to connect to the backend.
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 server.use("/images", express.static(path.join(__dirname, "/images"))); // To make the images folder accessible and public.
@@ -29,7 +29,7 @@ server.use("/images", express.static(path.join(__dirname, "/images"))); // To ma
 // To upload images, we need to use multer.
 // First, we need to create a storage object.
 const storage = multer.diskStorage({
-  // This is the destination of the image. We will save it in the images folder. It accepts three parameters: request, file, callback. 
+  // This is the destination of the image. We will save it in the images folder. It accepts three parameters: request, file, callback.
   // request is the request object, file is the file object, and callback is the function that we will call when we are done. The callback function will have two parameters: error and the file.
   destination: (req, file, cb) => {
     cb(null, "images");
@@ -51,34 +51,39 @@ server.post("/api/upload", upload.single("file"), (req, res) => {
 
 //******************* ENDPOINTS ********************
 // All of the endpoints will a prefix. for example /api/auth is the prefix for all the endpoints in auth.js
-server.use("/api/auth", authRouter)
-server.use("/api/users", userRouter)
-server.use("/api/posts", postRouter)
-server.use("/api/categories", categoryRouter)
-
-// Middleware to tell to Express app that we are using this directory as a static folder. This is when we deploy our app.
-server.use(express.static(path.join(__dirname, "/client/build")));
-// When the application gets any request, it will redirect to this path, which is 'client' folder. It will redirect to 'client' folder, and it will look inside 'build' folder (that we don't have yet, but during deployment, Heroku will create it for us) and in the end will use index.html file to display the content in the broweser.
-server.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
-});
-
-
-
+server.use("/api/auth", authRouter);
+server.use("/api/users", userRouter);
+server.use("/api/posts", postRouter);
+server.use("/api/categories", categoryRouter);
 
 // *********************** ERROR MIDDLEWARES ***************************
 // Always to be defined after all the routes
+
+// mongoose
+//   .connect(process.env.MONGO_URL, {
+//     useNewUrlParser: true,
+//     useCreateIndex: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     console.log("Connected to Mongo!");
+//   })
+//   .catch((err) => {
+//     console.error("Error connecting to Mongo", err);
+//   });
 
 // mongoose getting-started.js
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect("mongodb+srv://ishmael:dostojevski@cluster0.oqgfe.mongodb.net/myBlog?retryWrites=true&w=majority");
-  console.log("😎 DB is running succesfully")
+  await mongoose.connect(
+    "mongodb+srv://ishmael:dostojevski@cluster0.oqgfe.mongodb.net/myBlog?retryWrites=true&w=majority"
+  );
+  console.log("😎 DB is running succesfully");
 }
 
 console.table(listEndpoints(server)); // To list all endpoints in the console.
 // Server to listen on the port specified.
-server.listen(process.env.PORT || port, () => {
+server.listen(port, () => {
   console.log("🧡 server is running on port: " + port);
 });

@@ -2,15 +2,10 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "engines": {
-    "node": "14.16.1"
-  },
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon -e js index.js",
-    "start": "node index.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "start": "nodemon -e js index.js"
   },
   "keywords": [],
   "author": "",
