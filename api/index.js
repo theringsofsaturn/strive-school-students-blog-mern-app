@@ -76,9 +76,7 @@ server.use("/api/categories", categoryRouter);
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect(
-    "mongodb+srv://ishmael:dostojevski@cluster0.oqgfe.mongodb.net/myBlog?retryWrites=true&w=majority"
-  );
+  await mongoose.connect(process.env.MONGO_URL);
   console.log("😎 DB is running succesfully");
 }
 
