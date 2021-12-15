@@ -2,8 +2,6 @@ import express from "express";
 import User from "../models/User.js";
 import Post from "../models/Post.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import verify from "../verifyToken.js"
 
 const userRouter = express.Router();
 
@@ -11,7 +9,7 @@ const userRouter = express.Router();
 // We use the "id" parameter because we want to update a specific user.
 userRouter.put("/:id", async (req, res) => {
   // Check if user id sent in the request is = the id of the user that we want to update (the id in URL --> req.params)...
-  if (req.body.userId === req.params.id || req.user.isAdmin) {
+  if (req.body.userId === req.params.id) {
     // another conditional to check if we are sending the password in the request. In that case we should hash the password.
     if (req.body.password) {
       const salt = await bcrypt.genSalt(10);
@@ -37,9 +35,9 @@ userRouter.put("/:id", async (req, res) => {
 });
 
 // ************ DELETE ************
-userRouter.delete("/:id", verify, async (req, res) => {
-
-  if (req.body.userId === req.params.id || req.user.isAdmin) {
+userRouter.delete("/:id", async (req, res) => {
+  // Check if the user id sent in the request is = the id of the user that we want to delete (the id in URL --> req.params)...
+  if (req.body.userId === req.params.id) {
     try {
       // Find the user by id. We indicate the id we have in the URL as a parameter (/:id)
       const user = await User.findById(req.params.id);

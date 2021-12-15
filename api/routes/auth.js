@@ -42,23 +42,21 @@ authRouter.post("/login", async (req, res) => {
 
     // If the user is found, we should validate the password. For example we compare the password "123" with password saved as hash in our database. If they are the same, the user can log in. We use compare() method from bcrypt for this, which takes as the first parameter the password that the user entered, and the second parameter is the password that we have saved in our database.
     const validated = await bcrypt.compare(req.body.password, user.password);
-    
+
     // If the password is not validated, we send a message.
     !validated && res.status(400).json("Wrong credentials!");
 
     // If the password is validated, we send the user back to the client.
-      // json web token to secure our Login
-      const accessToken = jwt.sign(
-        { id: user._id, isAdmin: user.isAdmin },
-        process.env.SECRET_KEY,
-        { expiresIn: "90d" }
-      );
+    // json web token to secure our Login
+    const accessToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
+      expiresIn: "90d",
+    });
 
     // res.status(200).json(user); ==> this will show the password (hashed) in the response.
     // **N.B.** We don't want to send the password (even though hashed) back to the client.
     const { password, ...others } = user._doc; // We use the spread operator to remove the password from the user. It this case, it will not show up the password in the response, but it will show the other properties ("other" is everything else in the document").
     // ** if we don't add _doc, we will get every kind of property from the user. So, we need user._doc. It will return the user with the properties defined in the schema.
-    res.status(200).json({...others, accessToken}); // send back other properties without the password.
+    res.status(200).json({ ...others, accessToken }); // send back other properties without the password.
   } catch (error) {
     console.log(error);
   }

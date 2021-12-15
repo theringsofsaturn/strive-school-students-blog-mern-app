@@ -69,6 +69,7 @@ export default function TopBar() {
           <Link to="/settings">
             <img
               className="topImg"
+              // src="https://images.gr-assets.com/users/1632342929p8/140785582.jpg"
               src={publicFolder+user.profilePic}
               alt=""
             />
