@@ -13,6 +13,7 @@ import { fileURLToPath } from "url";
 import passport from "passport";
 import cookieSession from "cookie-session";
 import cookieParser from "cookie-parser"
+import passportConfig from "./passport.js"
 
 import authRouter from "./routes/auth.js";
 import userRouter from "./routes/users.js";
@@ -27,9 +28,9 @@ server.use(express.json()); // // This has to be specified BEFORE the routes, ot
 // Cors => To allow the frontend to connect to the backend.
 server.use(
   cors({
-    origin: "http://localhost:3000",
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
+    origin: "http://localhost:3000", // Client server
+    methods: "GET,POST,PUT,DELETE", // Allowed methods
+    credentials: true, // It basically allows us to send sessions through our client server requests.
   })
 );
 
@@ -44,8 +45,8 @@ server.use(
 );
 
 // Initialize Passport library
-server.use(passport.initialize());
-server.use(passport.session());
+server.use(passport.initialize()); 
+server.use(passport.session()); 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 server.use("/images", express.static(path.join(__dirname, "/images"))); // To make the images folder accessible and public.
