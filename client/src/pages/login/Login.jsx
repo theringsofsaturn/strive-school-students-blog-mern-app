@@ -9,18 +9,17 @@ import Github from "../../assets/github.png";
 
 import "./login.css";
 
-const Login = () => {
   const Login = () => {
     const google = () => {
-      window.open("http://localhost:5000/auth/google", "_self");
+      window.open("http://localhost:3001/api/auth/google", "_self");
     };
 
     const github = () => {
-      window.open("http://localhost:5000/auth/github", "_self");
+      window.open("http://localhost:3001/api/auth/github", "_self");
     };
 
     const facebook = () => {
-      window.open("http://localhost:5000/auth/facebook", "_self");
+      window.open("http://localhost:3001/api/auth/facebook", "_self");
     };
 
     const userRef = useRef();
@@ -72,7 +71,7 @@ const Login = () => {
             {/* <input type="text" placeholder="Username" />
             <input type="text" placeholder="Password" />
             <button className="submit">Login</button> */}
-            <span className="loginTitle">Login</span>
+            {/* <span className="loginTitle">Login</span> */}
       <form className="loginForm" onSubmit={handleSubmit}>
         <label>Username</label>
         <input
@@ -100,6 +99,5 @@ const Login = () => {
       </div>
     );
   };
-};
 
 export default Login;

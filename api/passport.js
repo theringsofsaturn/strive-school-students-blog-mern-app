@@ -6,7 +6,7 @@ const googleCloudStrategy = new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `${process.env.API_URL}/users/googleRedirect`,
+      callbackURL: "/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, passportNext) => {
       try {

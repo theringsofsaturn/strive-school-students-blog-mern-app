@@ -5,6 +5,8 @@ import jwt from "jsonwebtoken";
 import verify from "../verifyToken.js";
 // import { generateAccessToken, generateRefreshToken } from "../generateToken.js";
 
+const CLIENT_URL = "http://localhost:3000/";
+
 const authRouter = express.Router();
 
 // ************ REGISTER ************
@@ -61,9 +63,67 @@ authRouter.post("/login", async (req, res) => {
     // **N.B.** We don't want to send the password (even though hashed) back to the client.
     const { password, ...others } = user._doc; // We use the spread operator to remove the password from the user. It this case, it will not show up the password in the response, but it will show the other properties ("other" is everything else in the document").
     // ** if we don't add _doc, we will get every kind of property from the user. So, we need user._doc. It will return the user with the properties defined in the schema.
-    res.status(200).json({ ...others, accessToken }); // send back other properties without the password.
+    res.status(200).json({
+      ...others,
+      accessToken,
+      success: true,
+      message: "success",
+      user: req.user,
+    });
   } catch (error) {
     console.log(error);
   }
 });
+
+authRouter.get("/login/failed", (req, res) => {
+  res.status(401).json({
+    success: false,
+    message: "failure",
+  });
+});
+
+// router.get("/logout", (req, res) => {
+//   req.logout();
+//   res.redirect(CLIENT_URL);
+// });
+
+// ********************* GOOGLE **********************
+authRouter.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile"] })
+);
+
+authRouter.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    successRedirect: CLIENT_URL,
+    failureRedirect: "/login/failed",
+  })
+);
+
+// ************************* GITHUB ************************
+router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
+
+router.get(
+  "/github/callback",
+  passport.authenticate("github", {
+    successRedirect: CLIENT_URL,
+    failureRedirect: "/login/failed",
+  })
+);
+
+// ********************** FACEBOOK ************************
+router.get(
+  "/facebook",
+  passport.authenticate("facebook", { scope: ["profile"] })
+);
+
+router.get(
+  "/facebook/callback",
+  passport.authenticate("facebook", {
+    successRedirect: CLIENT_URL,
+    failureRedirect: "/login/failed",
+  })
+);
+
 export default authRouter;
