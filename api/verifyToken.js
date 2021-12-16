@@ -7,6 +7,7 @@ function verify(req, res, next) {
 
     jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
       if (err) res.status(403).json("Token is not valid!");
+      // Else, if there's no error, assign user and next = >
       req.user = user;
       next();
     });
