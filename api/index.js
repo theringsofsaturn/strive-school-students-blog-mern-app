@@ -8,13 +8,8 @@ import uniqid from "uniqid"; // To generate a unique id, we can use the uniqid p
 import listEndpoints from "express-list-endpoints"; // List all endpoints in the console.
 import multer from "multer";
 import path from "path";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import passport from "passport";
-import cookieSession from "cookie-session";
-import cookieParser from "cookie-parser"
-import passportConfig from "./passport.js"
-
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import authRouter from "./routes/auth.js";
 import userRouter from "./routes/users.js";
 import postRouter from "./routes/posts.js";
@@ -25,28 +20,7 @@ dotenv.config(); // To make possible to use dotenv, and update the code and refr
 const port = 3001; // To define the port we want to use.
 const server = express(); // We need to create an express server.
 server.use(express.json()); // // This has to be specified BEFORE the routes, otherwise the body will be UNDEFINED
-// Cors => To allow the frontend to connect to the backend.
-server.use(
-  cors({
-    origin: "http://localhost:3000", // Client server
-    methods: "GET,POST,PUT,DELETE", // Allowed methods
-    credentials: true, // It basically allows us to send sessions through our client server requests.
-  })
-);
-
-// ************ COOKIES ***************
-// Sessions
-server.use(
-  cookieSession({
-    name: "session",
-    keys: ["ishmael"],
-    maxAge: 24 * 60 * 60 * 100, // 24 hours
-  })
-);
-
-// Initialize Passport library
-server.use(passport.initialize()); 
-server.use(passport.session()); 
+server.use(cors()) // To allow the frontend to connect to the backend.
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 server.use("/images", express.static(path.join(__dirname, "/images"))); // To make the images folder accessible and public.
@@ -55,7 +29,7 @@ server.use("/images", express.static(path.join(__dirname, "/images"))); // To ma
 // To upload images, we need to use multer.
 // First, we need to create a storage object.
 const storage = multer.diskStorage({
-  // This is the destination of the image. We will save it in the images folder. It accepts three parameters: request, file, callback.
+  // This is the destination of the image. We will save it in the images folder. It accepts three parameters: request, file, callback. 
   // request is the request object, file is the file object, and callback is the function that we will call when we are done. The callback function will have two parameters: error and the file.
   destination: (req, file, cb) => {
     cb(null, "images");
@@ -77,33 +51,22 @@ server.post("/api/upload", upload.single("file"), (req, res) => {
 
 //******************* ENDPOINTS ********************
 // All of the endpoints will a prefix. for example /api/auth is the prefix for all the endpoints in auth.js
-server.use("/api/auth", authRouter);
-server.use("/api/users", userRouter);
-server.use("/api/posts", postRouter);
-server.use("/api/categories", categoryRouter);
+server.use("/api/auth", authRouter)
+server.use("/api/users", userRouter)
+server.use("/api/posts", postRouter)
+server.use("/api/categories", categoryRouter)
+
+
 
 // *********************** ERROR MIDDLEWARES ***************************
 // Always to be defined after all the routes
-
-// mongoose
-//   .connect(process.env.MONGO_URL, {
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => {
-//     console.log("Connected to Mongo!");
-//   })
-//   .catch((err) => {
-//     console.error("Error connecting to Mongo", err);
-//   });
 
 // mongoose getting-started.js
 main().catch((err) => console.log(err));
 
 async function main() {
   await mongoose.connect(process.env.MONGO_URL);
-  console.log("😎 DB is running succesfully");
+  console.log("😎 DB is running succesfully")
 }
 
 console.table(listEndpoints(server)); // To list all endpoints in the console.

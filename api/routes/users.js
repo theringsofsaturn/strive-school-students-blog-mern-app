@@ -2,13 +2,12 @@ import express from "express";
 import User from "../models/User.js";
 import Post from "../models/Post.js";
 import bcrypt from "bcrypt";
-import verify from "../verifyToken.js";
-// When we make a request and call the URL in the routers below, before making any process inside that function, it is going to call the verify() function. And the middlewares are able to access the request and the response. It will look at the token, verify it, check for errors if there's any, and if not it will assign the payload (in this case, the user to req.user), and then use next(). After next(), it will turn back here (in the routes below where it's called), finshing its process, so we can continue, checking the req and res etc...
+
 const userRouter = express.Router();
 
 // ************ UPDATE ************
 // We use the "id" parameter because we want to update a specific user.
-userRouter.put("/:id", verify, async (req, res) => {
+userRouter.put("/:id", async (req, res) => {
   // Check if user id sent in the request is = the id of the user that we want to update (the id in URL --> req.params)...
   if (req.body.userId === req.params.id) {
     // another conditional to check if we are sending the password in the request. In that case we should hash the password.
