@@ -4,7 +4,8 @@ import Posts from "../../component/posts/Posts";
 import Sidebar from "../../component/sidebar/Sidebar";
 import "./homepage.css";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { axiosInstance } from "../../config";
+   
 
 const Homepage = () => {
   // ************** STATES **************
@@ -16,7 +17,7 @@ const Homepage = () => {
     // *************** FETCHING POSTS ********************
     // When we want to use axios, we need a variable to store the response, as we are using async/await
     const fetchPosts = async () => {
-      const res = await axios.get("http://localhost:3001/api/posts" + search); // Fetching posts by a user.
+      const res = await axiosInstance.get("/posts" + search); // Fetching posts by a user.
       setPosts(res.data);
       // console.log("Posts Data Fetched in the Homepage", res.data);
     };

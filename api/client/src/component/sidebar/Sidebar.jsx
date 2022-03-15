@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import "./sidebar.css";
+import { axiosInstance } from "../../config";
 
 const Sidebar = () => {
   const [cats, setCats] = useState([]); // Set the categories state to an empty array. This will be filled with the category data.
 
   useEffect(() => {
     const getCats = async () => {
-      const res = await axios.get("http://localhost:3001/api/categories");
+      const res = await axiosInstance.get("/categories");
       // console.log("Categories Data fetched in the Sidebar", res.data);
       setCats(res.data);
     };
@@ -24,8 +24,8 @@ const Sidebar = () => {
           alt=""
         />
         <p>
-         I am Emilian Kasemi. <br/>
-         I'm a Full-Stack Developer, graduating from Strive School.
+          I am Emilian Kasemi. <br />
+          I'm a Full-Stack Developer, graduating from Strive School.
         </p>
       </div>
       <div className="sidebarItem">

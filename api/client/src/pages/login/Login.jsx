@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axiosInstance } from "../../config";
 import { useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
@@ -15,7 +15,7 @@ const Login = () => {
     // When I click the button Login, it will call LOGIN_START action, it will update so, isFetching to true, and we can make our API call.
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("http://localhost:3001/api/auth/login", {
+      const res = await axiosInstance.post("/auth/login", {
         // Pass the data that we required on the backend part
         username: userRef.current.value,
         password: passwordRef.current.value,

@@ -1,7 +1,7 @@
 import "./register.css";
 import { useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { axiosInstance } from "../../config";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -13,17 +13,17 @@ const Register = () => {
     e.preventDefault(); // To prevent refrshing after submitting
     setError(false); // Reset the error state to false.
     try {
-      const res = await axios.post("http://localhost:3001/api/auth/register", {
+      const res = await axiosInstance.post("/auth/register", {
         // Will send this data when registering as specified in the backend as required.
         username,
         email,
         password,
       });
-      console.log("Registration Data",res);
+      console.log("Registration Data", res);
       // If the response is successful and there are no errors, then redirect to the login page.
       res.data && window.location.replace("/login");
     } catch (err) {
-      setError(true); // If any error, set the error state to true. The user will need to write the correct data. 
+      setError(true); // If any error, set the error state to true. The user will need to write the correct data.
     }
   };
 
@@ -61,7 +61,11 @@ const Register = () => {
           Login
         </Link>
       </button> */}
-      {error && <span style={{color:"red", marginTop:"10px"}}>Something went wrong!</span>}
+      {error && (
+        <span style={{ color: "red", marginTop: "10px" }}>
+          Something went wrong!
+        </span>
+      )}
     </div>
   );
 };
