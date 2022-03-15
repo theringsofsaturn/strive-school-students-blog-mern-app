@@ -52,7 +52,7 @@ const Login = () => {
           Login
         </button>
       </form>
-      <button className="loginRegisterButton">Register</button>
+      {/* <button className="loginRegisterButton">Register</button> */}
     </div>
   );
 };
