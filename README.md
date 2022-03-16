@@ -5,7 +5,7 @@ This is full stack MERN application blog for students where they can create an a
 
 ## Tech Stack
 
-**Client:** React, Redux, CSS
+**Client:** React, Redux
 
 **Server:** Node, Express, MongoDB
 
