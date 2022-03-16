@@ -1,7 +1,7 @@
 
 # Strive School Students Blog
 
-This is full stack MERN application blog for students where they can create an authenticated user profile, post articles and share it with other users. 
+This is a full stack MERN application blog for students where they can create an authenticated user profile, post articles and share it with other users. 
 
 ## Tech Stack
 
