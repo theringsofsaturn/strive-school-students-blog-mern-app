@@ -48,7 +48,7 @@ Start the server
 
 ## Author
 
-- [@theringsofsaturn](https://github.com/theringsofsaturn)
+- Emilian Kasemi - [@theringsofsaturn](https://github.com/theringsofsaturn) 
 
 
 ## Support
