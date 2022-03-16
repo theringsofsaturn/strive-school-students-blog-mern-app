@@ -3,7 +3,7 @@ import "./post.css";
 
 // Taking the {post} from the props in the Posts.jsx component
 const Post = ({ post }) => {
-  const publicFolder = "http://localhost:3001/images/"; //Images in /api/images/
+  const publicFolder = "/images/"; //Images in /api/images/
   return (
     <div className="post">
       {/* If there's post image, show it, if not, just don't show any image */}

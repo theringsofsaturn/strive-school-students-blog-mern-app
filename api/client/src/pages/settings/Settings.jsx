@@ -12,7 +12,7 @@ const Settings = () => {
   const [success, setSuccess] = useState(false);
 
   const { user, dispatch } = useContext(Context);
-  const publicFolder = "http://localhost:3001/images/";
+  const publicFolder = "/images/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
