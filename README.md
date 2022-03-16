@@ -3,12 +3,6 @@
 
 This is a full stack MERN application blog for students where they can create an authenticated user profile, post articles and share it with other users. 
 
-## Tech Stack
-
-**Client:** React, Redux
-
-**Server:** Node, Express, MongoDB
-
 
 ## Screenshots
 
@@ -17,6 +11,13 @@ This is a full stack MERN application blog for students where they can create an
 ![App Screenshot](https://res.cloudinary.com/dqiyjy9ye/image/upload/v1647391961/striveBlog/screenshots/blog2_xrocsw.png)
 
 ![App Screenshot](https://res.cloudinary.com/dqiyjy9ye/image/upload/v1647391961/striveBlog/screenshots/blog3_tumqxx.png)
+
+
+## Tech Stack
+
+**Client:** React, Redux
+
+**Server:** Node, Express, MongoDB
 
 
 ## Run Locally
